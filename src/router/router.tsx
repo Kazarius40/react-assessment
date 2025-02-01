@@ -17,7 +17,7 @@ export const routes = createBrowserRouter([
             {path: 'auth/users/:userId', element: <UserPage/>},
             {path: 'auth/recipes', element: <RecipesPage/>},
             {path: 'auth/recipes/:recipeId', element: <RecipePage/>},
-            {path: '/auth/recipes/:tag', element: <RecipeTagPage/>}
+            {path: '/auth/recipes/tag/:tag', element: <RecipeTagPage/>}
         ],
     },
 ])

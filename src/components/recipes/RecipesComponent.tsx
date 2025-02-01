@@ -1,18 +1,25 @@
-import { useCallback, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { IRecipes } from "../../models/recipes/IRecipes";
-import { IRecipe } from "../../models/recipe/IRecipe";
-import { axiosInstance } from "../../services/api.service";
-import { refresh } from "../../services/auth.service";
+import {useCallback, useEffect, useState} from "react";
+import {Link, useSearchParams} from "react-router-dom";
+import {IRecipes} from "../../models/recipes/IRecipes";
+import {IRecipe} from "../../models/recipe/IRecipe";
+import {axiosInstance} from "../../services/api.service";
+import {refresh} from "../../services/auth.service";
 
 export const RecipesComponent = () => {
     const [recipes, setRecipes] = useState<IRecipe[]>([]);
     const [search, setSearch] = useState("");
+    const [query, setQuery] = useSearchParams({pg: "1"});
+
 
     const fetchRecipes = useCallback(async (retry = false) => {
         try {
-            const { data: { total } } = await axiosInstance.get<IRecipes>("/auth/recipes?limit=1");
-            const { data } = await axiosInstance.get<IRecipes>("/auth/recipes?limit=" + total);
+            const pg = Number(query.get('pg')) || 1;
+            const limit = 10;
+            const skip = (pg - 1) * limit;
+
+            const {data} = await axiosInstance.get<IRecipes>("/auth/recipes", {
+                params: {limit, skip}
+            });
             setRecipes(data.recipes);
         } catch {
             if (!retry) {
@@ -23,10 +30,10 @@ export const RecipesComponent = () => {
     }, []);
 
     useEffect(() => {
-        fetchRecipes().catch(error => console.error("Помилка:", error));
+        fetchRecipes().catch(error => console.error(error));
     }, [fetchRecipes]);
 
-    const filteredRecipes = recipes.filter(({ name, id }) =>
+    const filteredRecipes = recipes.filter(({name, id}) =>
         name.toLowerCase().includes(search.toLowerCase()) ||
         id.toString().includes(search)
     );
@@ -55,6 +62,30 @@ export const RecipesComponent = () => {
                     </li>
                 ))}
             </ul>
+
+            <button
+                onClick={() => {
+                    const pg = Number(query.get('pg'));
+                    if (pg > 1) {
+                        let currentPage = +pg;
+                        setQuery({pg: (--currentPage).toString()});
+                    }
+                }}
+            >
+                Попередня
+            </button>
+
+            <button
+                onClick={() => {
+                    const pg = query.get('pg');
+                    if (pg) {
+                        let currentPage = +pg;
+                        setQuery({pg: (++currentPage).toString()});
+                    }
+                }}
+            >
+                Наступна
+            </button>
         </>
     );
 };

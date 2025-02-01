@@ -1,4 +1,5 @@
 import { IRecipe } from "../../models/recipe/IRecipe.ts";
+import {Link} from "react-router-dom";
 
 interface IRecipeDetailsProps {
     recipe: IRecipe;
@@ -16,7 +17,9 @@ export const RecipeDetails = ({ recipe }: IRecipeDetailsProps) => {
             <div>
                 <h4>Теги:</h4>
                 {recipe.tags.map((tag, index) => (
-                    <span key={index}>{tag}</span>
+                    <div key={index}>
+                        <Link to={'/auth/recipes/tag/' + tag}>{tag}</Link>
+                    </div>
                 ))}
             </div>
         </div>
