@@ -1,12 +1,12 @@
-import {useParams} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {IUser} from "../models/user/IUser.ts";
 import {IRecipe} from "../models/recipe/IRecipe.ts";
 import {IRecipes} from "../models/recipes/IRecipes.ts";
 import {axiosInstance} from "../services/api.service.ts";
 import {refresh} from "../services/auth.service.ts";
-import {UserInfo} from "../components/user/UserInfo.tsx";
-import {UserRecipes} from "../components/user/UserRecipes.tsx";
+import {UserInfo} from "../components/users/UserInfo.tsx";
+import {UserRecipes} from "../components/users/UserRecipes.tsx";
 
 export const UserPage = () => {
     const {userId} = useParams<{ userId: string }>();
@@ -43,6 +43,7 @@ export const UserPage = () => {
         <>
             <UserInfo user={user} />
             <UserRecipes recipes={recipes} />
+            <Link to="/auth/users">Назад до списку користувачів</Link>
         </>
     );
 };

@@ -21,8 +21,6 @@ export const UserRecipes: FC<IUserRecipesProps> = ({ recipes }) => {
             ) : (
                 <p>Рецепти у даного користувача відсутні</p>
             )}
-
-            <Link to="/auth/users">Назад до списку користувачів</Link>
         </div>
     );
 };
