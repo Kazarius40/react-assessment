@@ -1,6 +1,7 @@
 import {useState} from "react";
-import {IRecipe} from "../../models/recipe/IRecipe";
+import {IRecipe} from "../../../models/recipe/IRecipe.ts";
 import {Link} from "react-router-dom";
+import "./RecipesComponent.css"
 
 interface RecipesComponentProps {
     recipes: IRecipe[];
@@ -18,29 +19,30 @@ export const RecipesComponent = ({recipes, allRecipes}: RecipesComponentProps) =
         : recipes;
 
     return (
-        <>
-            <h2>Список рецептів</h2>
+        <div className="recipes-container">
+            <h2 className="recipes-title">Список рецептів</h2>
 
             <input
                 type="text"
+                className="recipes-search"
                 placeholder="Введіть назву рецепта"
                 value={search}
                 onChange={e => setSearch(e.target.value)}
             />
 
-            <ul>
+            <ul className="recipes-list">
                 {filteredRecipes.map(recipe => (
-                    <li key={recipe.id}>
-                        <p>
+                    <li key={recipe.id} className="recipe-item">
+                        <p className="recipe-id">
                             <strong>ID:</strong> {recipe.id}
                         </p>
-                        <p>
+                        <p className="recipe-name">
                             <strong>Назва:</strong> {recipe.name}
                         </p>
-                        <Link to={"/auth/recipes/" + recipe.id}>Переглянути рецепт</Link>
+                        <Link className="recipe-link" to={"/auth/recipes/" + recipe.id}>Переглянути рецепт</Link>
                     </li>
                 ))}
             </ul>
-        </>
+        </div>
     );
 };

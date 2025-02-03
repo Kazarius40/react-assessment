@@ -1,0 +1,38 @@
+.recipe-details-container {
+    padding: 20px;
+    border: 1px solid lightgray;
+    border-radius: 8px;
+    background-color: white;
+    margin-bottom: 20px;
+}
+
+.recipe-details-title {
+    font-size: 24px;
+    color: black;
+    margin-bottom: 10px;
+}
+
+.recipe-details-instructions {
+    font-size: 14px;
+    color: dimgray;
+}
+
+.recipe-details-step {
+    margin-bottom: 10px;
+}
+
+.recipe-details-tags {
+    margin-top: 20px;
+}
+
+.recipe-details-tags-title {
+    font-size: 16px;
+    color: black;
+    margin-bottom: 10px;
+}
+
+.recipe-details-tag-link {
+    text-decoration: none;
+    color: cornflowerblue;
+    font-weight: bold;
+}

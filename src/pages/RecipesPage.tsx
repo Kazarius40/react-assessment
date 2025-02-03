@@ -1,4 +1,4 @@
-import {RecipesComponent} from "../components/recipes/RecipesComponent.tsx";
+import {RecipesComponent} from "../components/recipes/recipes-page/RecipesComponent.tsx";
 import {PaginationComponent} from "../components/pagination/PaginationComponent.tsx";
 import {useCallback, useEffect, useState} from "react";
 import {refresh} from "../services/auth.service.ts";

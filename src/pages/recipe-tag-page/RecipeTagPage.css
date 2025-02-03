@@ -1,0 +1,28 @@
+.recipe-tag-page {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px gray;
+    text-align: center;
+}
+
+.recipe-tag-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: black;
+    margin-bottom: 20px;
+}
+
+.recipe-tag-back-link {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 15px;
+    color: white;
+    background: blue;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background 0.3s;
+}

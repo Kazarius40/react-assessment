@@ -1,0 +1,9 @@
+.recipe-author-container {
+    margin-top: 20px;
+}
+
+.recipe-author-link {
+    font-weight: bold;
+    color: cornflowerblue;
+    text-decoration: none;
+}

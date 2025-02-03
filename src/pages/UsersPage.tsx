@@ -1,4 +1,4 @@
-import {UsersComponent} from "../components/users/UsersComponent.tsx";
+import {UsersComponent} from "../components/users/users/UsersComponent.tsx";
 import {useCallback, useEffect, useState} from "react";
 import {useAppSelector} from "../redux/hooks/useAppSelector.ts";
 import {IUser} from "../models/user/IUser.ts";

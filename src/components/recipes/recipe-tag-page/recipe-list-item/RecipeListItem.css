@@ -1,0 +1,7 @@
+.recipe-list-item {
+    background: lightgray;
+    padding: 12px;
+    border-radius: 8px;
+    text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+}

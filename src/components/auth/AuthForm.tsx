@@ -6,6 +6,7 @@ import {useAppDispatch} from "../../redux/hooks/useAppDispatch.ts";
 import {joiResolver} from "@hookform/resolvers/joi";
 import userAuthValidator from "../../validators/auth.validator.ts";
 import {login} from "../../services/auth.service.ts";
+import "./AuthForm.css";
 
 
 export const AuthForm = () => {
@@ -24,19 +25,19 @@ export const AuthForm = () => {
     };
 
     return (
-        <form onSubmit={handleSubmit(loginHandler)}>
+        <form className="auth-form" onSubmit={handleSubmit(loginHandler)}>
 
-            <label>
-                <input type="text" placeholder="Username"{...register('username')}/>
+            <label className="auth-form__label">
+                <input className="auth-form__input" type="text" placeholder="Username"{...register('username')}/>
                 {errors.username && <div>{errors.username.message}</div>}
             </label>
 
-            <label>
-                <input type="password" placeholder="Password"{...register('password')}/>
+            <label className="auth-form__label">
+                <input className="auth-form__input" type="password" placeholder="Password"{...register('password')}/>
                 {errors.password && <div>{errors.password.message}</div>}
             </label>
 
-            <button type="submit" disabled={!isValid}>Login</button>
+            <button className="auth-form__button" type="submit" disabled={!isValid}>Login</button>
 
         </form>
     );

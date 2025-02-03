@@ -1,7 +1,8 @@
-import {IUser} from "../../models/user/IUser.ts";
+import {IUser} from "../../../../models/user/IUser.ts";
 import {Link} from "react-router-dom";
 import {useEffect, useState} from "react";
-import {axiosInstance} from "../../services/api.service.ts";
+import {axiosInstance} from "../../../../services/api.service.ts";
+import "./RecipeAuthor.css"
 
 interface IRecipeAuthorProps {
     authorId: number;
@@ -17,8 +18,8 @@ export const RecipeAuthor = ({authorId}: IRecipeAuthorProps) => {
     if (!author) return null;
 
     return (
-        <p>
-            Автор: <Link to={'/auth/users/' + author.id}>{author.firstName} {author.lastName}</Link>
+        <p className="recipe-author-container">
+            Автор: <Link className="recipe-author-link" to={'/auth/users/' + author.id}>{author.firstName} {author.lastName}</Link>
         </p>
     );
 };

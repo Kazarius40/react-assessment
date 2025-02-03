@@ -5,8 +5,8 @@ import {IRecipe} from "../models/recipe/IRecipe.ts";
 import {IRecipes} from "../models/recipes/IRecipes.ts";
 import {axiosInstance} from "../services/api.service.ts";
 import {refresh} from "../services/auth.service.ts";
-import {UserInfo} from "../components/users/UserInfo.tsx";
-import {UserRecipes} from "../components/users/UserRecipes.tsx";
+import {UserInfo} from "../components/users/user/userInfo/UserInfo.tsx";
+import {UserRecipes} from "../components/users/user/userRecipes/UserRecipes.tsx";
 
 export const UserPage = () => {
     const {userId} = useParams<{userId: string}>();

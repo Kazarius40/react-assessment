@@ -4,8 +4,8 @@ import {AuthorizationPage} from "../pages/AuthorizationPage.tsx";
 import {UsersPage} from "../pages/UsersPage.tsx";
 import {UserPage} from "../pages/UserPage.tsx";
 import {RecipesPage} from "../pages/RecipesPage.tsx";
-import {RecipePage} from "../pages/RecipePage.tsx";
-import {RecipeTagPage} from "../pages/RecipeTagPage.tsx";
+import {RecipePage} from "../pages/recipe-page/RecipePage.tsx";
+import {RecipeTagPage} from "../pages/recipe-tag-page/RecipeTagPage.tsx";
 
 export const routes = createBrowserRouter([
     {
