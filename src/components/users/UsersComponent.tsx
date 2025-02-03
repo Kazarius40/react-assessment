@@ -1,35 +1,21 @@
-import {useCallback, useEffect, useState} from "react";
+import {useState} from "react";
 import {Link} from "react-router-dom";
-import {IUsers} from "../../models/users/IUsers.ts";
 import {IUser} from "../../models/user/IUser.ts";
-import {axiosInstance} from "../../services/api.service.ts";
-import {refresh} from "../../services/auth.service.ts";
 
-export const UsersComponent = () => {
-    const [users, setUsers] = useState<IUser[]>([]);
+interface UsersComponentProps {
+    users: IUser[];
+    allUsers: IUser[];
+}
+
+export const UsersComponent = ({users, allUsers}: UsersComponentProps) => {
     const [search, setSearch] = useState("");
 
-    const fetchUsers = useCallback(async (retry = false) => {
-        try {
-            const {data: {total}} = await axiosInstance.get<IUsers>("/auth/users?limit=1");
-            const {data} = await axiosInstance.get<IUsers>("/auth/users?limit=" + total);
-            setUsers(data.users);
-        } catch {
-            if (!retry) {
-                await refresh();
-                return fetchUsers(true);
-            }
-        }
-    }, []);
-
-    useEffect(() => {
-        fetchUsers().catch(error => console.error("Помилка:", error));
-    }, [fetchUsers]);
-
-    const filteredUsers = users.filter(({username, id}) =>
-        username.toLowerCase().includes(search.toLowerCase()) ||
-        id.toString().includes(search)
-    );
+    const filteredUsers = search
+        ? allUsers.filter(({username, id}) =>
+            username.toLowerCase().includes(search.toLowerCase()) ||
+            id.toString().includes(search)
+        )
+        : users;
 
     return (
         <>

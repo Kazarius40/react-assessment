@@ -14,8 +14,8 @@ const initialState: RecipesState = {
 
 export const fetchRecipes = createAsyncThunk(
     "recipes/fetchRecipes",
-    async ({limit, page}: {limit: number; page: number}) => {
-        return await fetchRecipesApi(limit, page);
+    async () => {
+        return await fetchRecipesApi();
     }
 );
 

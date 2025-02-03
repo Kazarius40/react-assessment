@@ -7,12 +7,14 @@ import {useAppSelector} from "../redux/hooks/useAppSelector.ts";
 import {fetchRecipesApi} from "../services/recipes.service.ts";
 import {useDispatch} from "react-redux";
 import {paginationSlice} from "../redux/slices/paginationSlice.ts";
+import {useLocation} from "react-router-dom";
 
 export const RecipesPage = () => {
     const {limit, page} = useAppSelector(state => state.pagination);
     const [recipes, setRecipes] = useState<IRecipe[]>([]);
     const [allRecipes, setAllRecipes] = useState<IRecipe[]>([]);
     const dispatch = useDispatch();
+    const location = useLocation();
 
     const fetchAllRecipes = useCallback(async () => {
         const localStorageRecipes = localStorage.getItem("allRecipes");
@@ -44,8 +46,11 @@ export const RecipesPage = () => {
     }, [allRecipes, limit, page]);
 
     useEffect(() => {
+        if (location.pathname.includes("auth/recipes")) {
+            dispatch(paginationSlice.actions.setPage(1));
+        }
         fetchAllRecipes().catch(console.error);
-    }, [fetchAllRecipes]);
+    }, [fetchAllRecipes, dispatch, location]);
 
     useEffect(() => {
         fetchRecipes();
