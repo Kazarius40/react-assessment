@@ -1,21 +1,19 @@
-import {useParams} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {IRecipe} from "../models/recipe/IRecipe.ts";
-import {IRecipes} from "../models/recipes/IRecipes.ts";
-import {axiosInstance} from "../services/api.service.ts";
-import {Link} from "react-router-dom";
 
 export const RecipeTagPage = () => {
     const {tag} = useParams<{tag: string}>();
     const [recipes, setRecipes] = useState<IRecipe[]>([]);
 
     useEffect(() => {
-        if (!tag) return;
+        const localStorageRecipes = localStorage.getItem("allRecipes");
 
-        axiosInstance
-            .get<IRecipes>('/auth/recipes/search?q=' + tag)
-            .then(({data}) => setRecipes(data.recipes || []))
-            .catch(console.error);
+        if (localStorageRecipes && tag) {
+            const recipes = JSON.parse(localStorageRecipes);
+            const filteredRecipes = recipes.filter((recipe: IRecipe) => recipe.tags.includes(tag));
+            setRecipes(filteredRecipes);
+        }
     }, [tag]);
 
 
