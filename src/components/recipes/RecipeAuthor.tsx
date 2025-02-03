@@ -1,5 +1,5 @@
-import { IUser } from "../../models/user/IUser.ts";
-import { Link } from "react-router-dom";
+import {IUser} from "../../models/user/IUser.ts";
+import {Link} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {axiosInstance} from "../../services/api.service.ts";
 

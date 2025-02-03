@@ -6,7 +6,7 @@ import {axiosInstance} from "../services/api.service.ts";
 import {Link} from "react-router-dom";
 
 export const RecipeTagPage = () => {
-    const {tag} = useParams<{ tag: string }>();
+    const {tag} = useParams<{tag: string}>();
     const [recipes, setRecipes] = useState<IRecipe[]>([]);
 
     useEffect(() => {

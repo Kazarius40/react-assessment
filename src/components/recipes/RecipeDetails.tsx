@@ -1,11 +1,11 @@
-import { IRecipe } from "../../models/recipe/IRecipe.ts";
+import {IRecipe} from "../../models/recipe/IRecipe.ts";
 import {Link} from "react-router-dom";
 
 interface IRecipeDetailsProps {
     recipe: IRecipe;
 }
 
-export const RecipeDetails = ({ recipe }: IRecipeDetailsProps) => {
+export const RecipeDetails = ({recipe}: IRecipeDetailsProps) => {
     return (
         <div>
             <h2>{recipe.name}</h2>

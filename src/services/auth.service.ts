@@ -22,11 +22,11 @@ export const refresh = async () => {
         throw new Error("Немає токену в локальному сховищі");
     }
 
-    const { data: { accessToken, refreshToken } } = await axiosInstance.post<ITokensPair>('/auth/refresh', {
+    const {data: {accessToken, refreshToken}} = await axiosInstance.post<ITokensPair>('/auth/refresh', {
         refreshToken: iUserWithTokens.refreshToken,
         expiresInMins: 1
     });
 
-    const updatedUser = { ...iUserWithTokens, accessToken, refreshToken };
+    const updatedUser = {...iUserWithTokens, accessToken, refreshToken};
     localStorage.setItem('user', JSON.stringify(updatedUser));
 };

@@ -4,36 +4,57 @@ import {useCallback, useEffect, useState} from "react";
 import {refresh} from "../services/auth.service.ts";
 import {IRecipe} from "../models/recipe/IRecipe.ts";
 import {useAppSelector} from "../redux/hooks/useAppSelector.ts";
-import {useDispatch} from "react-redux";
-import {paginationSliceActions} from "../redux/slices/paginationSlice.ts";
 import {fetchRecipesApi} from "../services/recipes.service.ts";
+import {useDispatch} from "react-redux";
+import {paginationSlice} from "../redux/slices/paginationSlice.ts";
 
 export const RecipesPage = () => {
-    const dispatch = useDispatch();
     const {limit, page} = useAppSelector(state => state.pagination);
     const [recipes, setRecipes] = useState<IRecipe[]>([]);
+    const [allRecipes, setAllRecipes] = useState<IRecipe[]>([]);
+    const dispatch = useDispatch();
 
-    const fetchRecipes = useCallback(async (retry = false) => {
-        try {
-            const data = await fetchRecipesApi(limit, page);
-            setRecipes(data.recipes);
-            dispatch(paginationSliceActions.setTotal(data.total));
-        } catch {
-            if (!retry) {
+    const fetchAllRecipes = useCallback(async () => {
+        const localStorageRecipes = localStorage.getItem("allRecipes");
+
+        if (localStorageRecipes) {
+            const parsedRecipes = JSON.parse(localStorageRecipes);
+            setAllRecipes(parsedRecipes);
+            dispatch(paginationSlice.actions.setTotal(parsedRecipes.length));
+        } else {
+            try {
+                const data = await fetchRecipesApi();
+
+                if (JSON.stringify(data.recipes) !== localStorageRecipes) {
+                    localStorage.setItem("allRecipes", JSON.stringify(data.recipes));
+                    setAllRecipes(data.recipes);
+                    dispatch(paginationSlice.actions.setTotal(data.total));
+                }
+            } catch {
                 await refresh();
-                return fetchRecipes(true);
+                return fetchAllRecipes();
             }
         }
-    }, [limit, page, dispatch]);
+    }, [dispatch]);
+
+    const fetchRecipes = useCallback(() => {
+        const firstIndex = (page - 1) * limit;
+        const lastIndex = firstIndex + limit;
+        setRecipes(allRecipes.slice(firstIndex, lastIndex));
+    }, [allRecipes, limit, page]);
 
     useEffect(() => {
-        fetchRecipes().catch(error => console.error(error));
+        fetchAllRecipes().catch(console.error);
+    }, [fetchAllRecipes]);
+
+    useEffect(() => {
+        fetchRecipes();
     }, [fetchRecipes]);
 
     return (
         <>
             <PaginationComponent/>
-            <RecipesComponent recipes={recipes}/>
+            <RecipesComponent recipes={recipes} allRecipes={allRecipes}/>
         </>
     );
 };

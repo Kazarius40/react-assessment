@@ -15,6 +15,9 @@ export const paginationSlice = createSlice({
         setPage(state, action: PayloadAction<number>) {
             state.page = action.payload;
         },
+        setLimit(state, action: PayloadAction<number>) {
+            state.limit = action.payload;
+        },
         setTotal(state, action: PayloadAction<number>) {
             state.total = action.payload;
         }

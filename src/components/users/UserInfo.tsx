@@ -5,7 +5,7 @@ interface IUserInfoProps {
     user: IUser;
 }
 
-export const UserInfo: FC<IUserInfoProps> = ({ user }) => {
+export const UserInfo: FC<IUserInfoProps> = ({user}) => {
     return (
         <div>
             <h2>Інформація про користувача</h2>

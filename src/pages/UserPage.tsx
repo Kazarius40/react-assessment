@@ -9,7 +9,7 @@ import {UserInfo} from "../components/users/UserInfo.tsx";
 import {UserRecipes} from "../components/users/UserRecipes.tsx";
 
 export const UserPage = () => {
-    const {userId} = useParams<{ userId: string }>();
+    const {userId} = useParams<{userId: string}>();
     const [user, setUser] = useState<IUser | null>(null);
     const [recipes, setRecipes] = useState<IRecipe[]>([]);
 
@@ -41,8 +41,8 @@ export const UserPage = () => {
 
     return (
         <>
-            <UserInfo user={user} />
-            <UserRecipes recipes={recipes} />
+            <UserInfo user={user}/>
+            <UserRecipes recipes={recipes}/>
             <Link to="/auth/users">Назад до списку користувачів</Link>
         </>
     );

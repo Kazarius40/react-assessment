@@ -9,7 +9,7 @@ import {login} from "../../services/auth.service.ts";
 
 
 export const AuthForm = () => {
-    const { register, handleSubmit, formState: { errors, isValid } } = useForm<IAuthForm>({
+    const {register, handleSubmit, formState: {errors, isValid}} = useForm<IAuthForm>({
         mode: 'all',
         resolver: joiResolver(userAuthValidator),
     });
@@ -18,7 +18,7 @@ export const AuthForm = () => {
     const navigate = useNavigate();
 
     const loginHandler = async (data: IAuthForm) => {
-        const userWithTokens = await login({ ...data, expiresInMins: 1 });
+        const userWithTokens = await login({...data, expiresInMins: 1});
         dispatch(authSliceActions.login(userWithTokens));
         navigate('/auth/recipes');
     };

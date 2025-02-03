@@ -4,15 +4,18 @@ import {Link} from "react-router-dom";
 
 interface RecipesComponentProps {
     recipes: IRecipe[];
+    allRecipes: IRecipe[];
 }
 
-export const RecipesComponent = ({recipes}: RecipesComponentProps) => {
+export const RecipesComponent = ({recipes, allRecipes}: RecipesComponentProps) => {
     const [search, setSearch] = useState("");
 
-    const filteredRecipes = recipes.filter(({name, id}) =>
-        name.toLowerCase().includes(search.toLowerCase()) ||
-        id.toString().includes(search)
-    );
+    const filteredRecipes = search
+        ? allRecipes.filter(({name, id}) =>
+            name.toLowerCase().includes(search.toLowerCase()) ||
+            id.toString().includes(search)
+        )
+        : recipes;
 
     return (
         <>

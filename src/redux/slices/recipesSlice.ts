@@ -27,7 +27,7 @@ export const recipesSlice = createSlice({
         builder.addCase(fetchRecipes.pending, (state) => {
             state.loading = true;
         });
-        builder.addCase(fetchRecipes.fulfilled, (state, { payload }) => {
+        builder.addCase(fetchRecipes.fulfilled, (state, {payload}) => {
             state.recipes = payload.recipes;
             state.loading = false;
         });
